@@ -43,7 +43,7 @@
 
 ### Phase 4: AI/LLM Integration ✅
 
-- ✅ AWS Bedrock setup (Mistral 7B)
+- ✅ AWS Bedrock setup (AWS Nova Micro 1)
 - ✅ Token usage tracking and logging
 - ✅ Prompt templates (summarization, flashcards, quiz)
 - ✅ Content summarization service
@@ -139,7 +139,7 @@ QuizTheBest/
 ## 🚀 Next Steps
 
 1. **Configure AWS Services**
-   - Set up AWS Bedrock (verify Mistral 7B availability)
+   - Set up AWS Bedrock (verify AWS Nova Micro 1 availability)
    - Configure Cognito User Pool
    - Set up Firebase project
    - Configure environment variables
@@ -169,13 +169,13 @@ QuizTheBest/
 - **Testing**: Basic structure is in place. E2E tests for content pipeline should be prioritized (Phase 9).
 - **Async Jobs**: Currently synchronous with timeout. Can be enhanced with job queue post-MVP.
 - **PDF Export**: Deferred from MVP as specified in plan.
-- **Model Verification**: Remember to verify Mistral 7B availability in chosen AWS region before deployment.
+- **Model Verification**: Remember to verify AWS Nova Micro 1 availability in chosen AWS region before deployment.
 
 ## ✅ MVP Checklist
 
 - [x] User authentication (AWS Cognito with refresh tokens)
 - [x] Topic search and content discovery (SerpAPI + scrapers)
-- [x] AI-powered summarization (AWS Bedrock Mistral 7B)
+- [x] AI-powered summarization (AWS Bedrock Nova Micro 1)
 - [x] Flashcard generation and viewing
 - [x] Basic quiz generation and taking
 - [x] Study set saving to Firestore

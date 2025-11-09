@@ -35,7 +35,7 @@ SERPAPI_KEY=your-serpapi-key
 ALLOWED_ORIGINS=https://your-frontend-domain.com
 
 # Bedrock - Verify model availability first!
-BEDROCK_MODEL_ID=mistral.mistral-7b-instruct-v0:1
+BEDROCK_MODEL_ID=amazon.nova-micro-v1:0
 BEDROCK_MAX_TOKENS=2000
 ```
 
@@ -85,8 +85,8 @@ VITE_COGNITO_CLIENT_ID=your-actual-client-id
 
 **Steps:**
 1. Go to AWS Bedrock Console
-2. Request access to Mistral models
-3. **VERIFY** `mistral.mistral-7b-instruct-v0:1` is available in your region (us-east-1 recommended)
+2. Request access to Amazon Nova models
+3. **VERIFY** `amazon.nova-micro-v1:0` is available in your region (us-east-1 recommended)
 4. Update `BEDROCK_MODEL_ID` if using a different model
 
 ### 5. GitHub Secrets (for CI/CD)
@@ -188,14 +188,14 @@ The JWT verification uses `jsonwebtoken` and `jwks-rsa`. If you encounter issues
 ```typescript
 export const BEDROCK_CONFIG = {
   region: process.env.AWS_REGION || 'us-east-1',
-  modelId: process.env.BEDROCK_MODEL_ID || 'mistral.mistral-7b-instruct-v0:1',
+  modelId: process.env.BEDROCK_MODEL_ID || 'amazon.nova-micro-v1:0',
   // ... rest of config
 }
 ```
 
 Run this to verify model availability:
 ```bash
-aws bedrock list-foundation-models --region us-east-1 --query "modelSummaries[?contains(modelId, 'mistral')]"
+aws bedrock list-foundation-models --region us-east-1 --query "modelSummaries[?contains(modelId, 'nova-micro')]"
 ```
 
 ## 🟡 Recommended - Before Production
@@ -242,7 +242,7 @@ Before running the app:
 
 ## 🚨 Common Issues
 
-1. **"Model not available"** - Check Bedrock console, verify region
+1. **"Model not available"** - Check Bedrock console, verify region, request access to Amazon Nova models
 2. **"Cognito token invalid"** - Check User Pool ID, Client ID, and refresh token settings
 3. **"Firebase permission denied"** - Deploy Firestore security rules
 4. **"CORS error"** - Check `ALLOWED_ORIGINS` in backend `.env`

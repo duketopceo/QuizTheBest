@@ -14,8 +14,8 @@ This guide covers the AWS services configuration needed for the Quiz The Best ap
 
 1. Navigate to AWS Bedrock Console: https://console.aws.amazon.com/bedrock/
 2. Go to "Model access" in the left sidebar
-3. Request access to Mistral models (if not already enabled)
-4. Verify that `mistral.mistral-7b-instruct-v0:1` is available in your chosen region
+3. Request access to Amazon Nova models (if not already enabled)
+4. Verify that `amazon.nova-micro-v1:0` is available in your chosen region
 5. **Recommended Region**: us-east-1 (verify availability before deployment)
 
 ### IAM Permissions
@@ -32,7 +32,7 @@ Create an IAM policy for Bedrock access:
         "bedrock:InvokeModel",
         "bedrock:ListFoundationModels"
       ],
-      "Resource": "arn:aws:bedrock:*::foundation-model/mistral.mistral-7b-instruct-v0:1"
+      "Resource": "arn:aws:bedrock:*::foundation-model/amazon.nova-micro-v1:0"
     }
   ]
 }
@@ -109,7 +109,7 @@ Example policy:
         "bedrock:InvokeModel",
         "bedrock:ListFoundationModels"
       ],
-      "Resource": "arn:aws:bedrock:*::foundation-model/mistral.mistral-7b-instruct-v0:1"
+      "Resource": "arn:aws:bedrock:*::foundation-model/amazon.nova-micro-v1:0"
     },
     {
       "Effect": "Allow",
@@ -144,7 +144,7 @@ AWS_SECRET_ACCESS_KEY=your-secret-key
 COGNITO_USER_POOL_ID=us-east-1_XXXXXXXXX
 COGNITO_CLIENT_ID=your-client-id
 
-BEDROCK_MODEL_ID=mistral.mistral-7b-instruct-v0:1
+BEDROCK_MODEL_ID=amazon.nova-micro-v1:0
 BEDROCK_MAX_TOKENS=2000
 ```
 
@@ -161,7 +161,7 @@ VITE_COGNITO_CLIENT_ID=your-client-id
 
 Before deployment, verify:
 
-- [ ] Mistral 7B model is available in Bedrock console for chosen region
+- [ ] AWS Nova Micro 1 model is available in Bedrock console for chosen region
 - [ ] Cognito User Pool created with refresh tokens enabled
 - [ ] App Client configured with correct callback URLs
 - [ ] IAM roles have necessary permissions
@@ -173,7 +173,7 @@ Before deployment, verify:
 ### Test Bedrock Access
 
 ```bash
-aws bedrock list-foundation-models --region us-east-1
+aws bedrock list-foundation-models --region us-east-1 --query "modelSummaries[?contains(modelId, 'nova-micro')]"
 ```
 
 ### Test Cognito
@@ -184,8 +184,8 @@ Create a test user in Cognito console and verify login flow.
 
 ### Bedrock Model Not Available
 
-- Check region: Mistral models may not be available in all regions
-- Request model access in Bedrock console
+- Check region: Nova models may not be available in all regions
+- Request model access in Bedrock console (Amazon Nova models)
 - Verify IAM permissions
 
 ### Cognito Token Issues
@@ -204,4 +204,4 @@ Create a test user in Cognito console and verify login flow.
 
 - [AWS Bedrock Documentation](https://docs.aws.amazon.com/bedrock/)
 - [AWS Cognito Documentation](https://docs.aws.amazon.com/cognito/)
-- [Mistral Models in Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html)
+- [Amazon Nova Models in Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html)

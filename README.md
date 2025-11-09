@@ -8,7 +8,7 @@ A Progressive Web App (PWA) that allows users to request learning topics and rec
 - **Backend**: Node.js, Express, TypeScript
 - **Database**: Firebase Firestore
 - **Authentication**: AWS Cognito with Amplify integration
-- **LLM**: AWS Bedrock (Mistral 7B model)
+- **LLM**: AWS Bedrock (AWS Nova Micro 1 model)
 - **Search**: SerpAPI + custom web scrapers (Cheerio) with rate limiting
 
 ## Project Structure
@@ -113,7 +113,7 @@ firebase deploy --only firestore:indexes
 
 ### Bedrock Setup
 
-1. Verify Mistral 7B model availability in your chosen AWS region (us-east-1 recommended)
+1. Verify AWS Nova Micro 1 model availability in your chosen AWS region (us-east-1 recommended)
 2. Enable the model in Bedrock console
 3. Configure IAM permissions for Bedrock access
 

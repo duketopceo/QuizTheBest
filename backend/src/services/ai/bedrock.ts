@@ -4,7 +4,7 @@ import { usageLogger } from '../../utils/usageLogger'
 import { logger } from '../../utils/logger'
 
 /**
- * AWS Bedrock client for Mistral 7B model
+ * AWS Bedrock client for AWS Nova Micro 1 model
  * With comprehensive token usage tracking
  */
 class BedrockService {
@@ -21,16 +21,35 @@ class BedrockService {
       const maxTokens = options.maxTokens || BEDROCK_CONFIG.maxTokens
       const temperature = options.temperature || BEDROCK_CONFIG.temperature
 
+      // Nova models use messages format, not prompt format
+      const isNovaModel = BEDROCK_CONFIG.modelId.includes('nova')
+      
+      const requestBody = isNovaModel
+        ? {
+            messages: [
+              {
+                role: 'user',
+                content: [{ text: prompt }],
+              },
+            ],
+            inferenceConfig: {
+              maxTokens,
+              temperature,
+              topP: BEDROCK_CONFIG.topP,
+            },
+          }
+        : {
+            prompt,
+            max_tokens: maxTokens,
+            temperature,
+            top_p: BEDROCK_CONFIG.topP,
+          }
+
       const input = {
         modelId: BEDROCK_CONFIG.modelId,
         contentType: 'application/json',
         accept: 'application/json',
-        body: JSON.stringify({
-          prompt,
-          max_tokens: maxTokens,
-          temperature,
-          top_p: BEDROCK_CONFIG.topP,
-        }),
+        body: JSON.stringify(requestBody),
       }
 
       const command = new InvokeModelCommand(input)
@@ -38,8 +57,23 @@ class BedrockService {
 
       const responseBody = JSON.parse(new TextDecoder().decode(response.body))
       
-      // Extract response text (format may vary by model)
-      const outputText = responseBody.completion || responseBody.text || responseBody.output || ''
+      // Extract response text (format varies by model)
+      let outputText = ''
+      if (isNovaModel) {
+        // Nova format: responseBody.output.message.content[0].text
+        outputText =
+          responseBody.output?.message?.content?.[0]?.text ||
+          responseBody.output?.text ||
+          responseBody.text ||
+          ''
+      } else {
+        // Other models (Mistral, etc.)
+        outputText =
+          responseBody.completion ||
+          responseBody.text ||
+          responseBody.output ||
+          ''
+      }
 
       // Log token usage
       const inputTokens = this.estimateTokens(prompt)
