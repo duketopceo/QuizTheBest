@@ -1,0 +1,75 @@
+You are an expert full-stack developer tasked with building a multi-platform AI-assisted learning application. The goal is to create an app that allows users to request any learning topic and have the AI automatically research, summarize, and generate flashcards, quizzes, explanations, and study guides based on that topic. The application should function on both Android and web (responsive web app or PWA).
+
+### Core Concept:
+The app acts like an intelligent research and learning companion. When a user enters a topic, the system’s AI searches verified educational sources, scrubs relevant data, and presents clean, summarized learning material. The user can then interact with the content to create flashcards, quizzes, and personalized lessons.
+
+### Tech Stack:
+- Frontend: React (web) + React Native (Android)
+- Backend: Node.js with Express or Fastify
+- Database: PostgreSQL or Firebase Firestore
+- API integration: OpenAI API or local LLM (e.g., Ollama or API endpoint)
+- Search layer: Use SerpAPI, Google Programmable Search Engine, or custom web-scraper (BeautifulSoup + Puppeteer)
+- Authentication: JWT with user sessions, Google OAuth optional
+- Deployment: Dockerized containers, deploy via AWS Amplify (frontend) and AWS Lambda/EC2 for backend
+- Optional: Redis cache for reused learning requests
+
+### Core User Flow:
+1. User logs in or continues as guest.
+2. User types a learning request or topic such as “history of thermodynamics” or “Python data structures.”
+3. Backend AI search module scrapes or queries public academic sources (Wikipedia, Khan Academy, PubMed, .edu sites, etc.).
+4. The AI engine cleans text using an LLM summarization pipeline:
+   - Extract key points
+   - Simplify complex language
+   - Structure data into sections: overview, key facts, references
+5. The AI then generates derivative learning materials:
+   - Flashcards (Q&A format)
+   - Quizzes (auto-multiple choice or true/false)
+   - Synopses (250-word to 1000-word summaries)
+   - “Quick Review Mode” (brief bullet review of main ideas)
+6. User can save or export these learning sets to their account.
+7. Optional: spaced repetition tracker for flashcards and study metrics dashboard.
+
+### Features to Implement:
+- Dashboard UI showcasing topics history, search bar, and AI assistant window
+- Generate mode: “Search + Summarize + Generate Cards”
+- Editable Flashcard Deck using React components
+- Quiz preview + auto generation with scoring
+- Study/Review visualization (progress bars or time spent)
+- Backend worker queue to pre-fetch and summarize large topics asynchronously
+- Theme support (light/dark mode)
+- Text-to-speech mode for summaries (via Web Speech API)
+- PWA capabilities so user can install web app on mobile devices
+
+### Backend Functions:
+- `/api/search`: fetch and clean web data
+- `/api/generate`: send cleaned corpus to LLM for summaries and flashcards
+- `/api/quiz`: create quizzes from key facts
+- `/api/user`: auth, saves, progress tracking
+- `/api/export`: allow export of flashcards or notes as .csv, .json, or .pdf
+
+### AI Prompt Handling Logic:
+Every user request triggers stepwise AI calls:
+1. Summarization prompt → extract structured knowledge
+2. Flashcard generation prompt → output array of Q&A pairs
+3. Quiz generation prompt → auto-generate MCQs or T/F
+4. Synoptic summary prompt → cohesive 500-word study summary
+
+### Example Commands:
+- “Generate study material for Ancient Greek philosophy.”
+- “Create 10 flashcards about neuron synapse function.”
+- “Summarize the causes of the 2008 financial crisis.”
+- “Make a self-grading quiz about Python dictionaries.”
+
+### Design Guidance:
+- UI style: Clean and modern, similar to Notion or Quizlet
+- Emphasize readability: cards with minimal clutter
+- Include scrollable sections for long-form summaries
+- Include option to export or share a study set
+- Responsive layouts for tablets and phones
+
+### Future Integrations:
+- Integration with Google Classroom or Canvas
+- User ranking/leaderboards for motivation
+- AI tutor mode using chat interface for interactive Q&A
+
+Goal: Produce full scaffolding code with modular design – frontend UI, API routes, LLM prompt templates, and database models for users, topics, and flashcards. Ensure the result compiles successfully and is deployable across Android and web as one codebase.
