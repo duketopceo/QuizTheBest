@@ -71,7 +71,7 @@ Write-Host "✅ SECURITY FIX COMPLETE" -ForegroundColor Green
 Write-Host "`nNext steps:" -ForegroundColor Cyan
 Write-Host "  1. Commit the removal: git commit -m 'Remove config.json from tracking'" -ForegroundColor White
 Write-Host "  2. If already pushed to GitHub, you need to remove from history:" -ForegroundColor White
-Write-Host "     See: docs/security/URGENT_AWS_KEY_REMEDIATION.md" -ForegroundColor White
+Write-Host "     Run: .\scripts\security\remove-config-from-history.ps1" -ForegroundColor White
 Write-Host "  3. Verify: .\verify-everything.ps1" -ForegroundColor White
 Write-Host ""
 

@@ -19,3 +19,12 @@ mobile/.env
 aws-secrets.env
 **/aws-secrets.env
 
+# Temporary files
+temp/
+*.tmp
+*.temp
+*.bak
+__pycache__/
+*.pyc
+*.pyo
+

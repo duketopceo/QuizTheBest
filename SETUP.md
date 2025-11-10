@@ -169,12 +169,15 @@ npm run android
 
 # Quick security check only
 .\scripts\verify-secrets-safe.ps1
+
+# Sync to git (includes security checks)
+.\scripts\utils\SYNC_NOW.ps1
 ```
 
 **If config.json is NOT ignored or was already committed (CRITICAL SECURITY RISK):**
 ```powershell
 # Remove from git tracking (keeps your local file safe)
-.\remove-config-from-git.ps1
+.\scripts\security\remove-config-from-git.ps1
 
 # Then commit the removal
 git commit -m "Remove config.json from tracking - security fix"
@@ -182,7 +185,7 @@ git commit -m "Remove config.json from tracking - security fix"
 
 **If config.json was already pushed to GitHub:**
 1. **IMMEDIATELY** rotate all API keys in config.json
-2. Remove from git history: `.\scripts\remove-secret-from-history.ps1`
+2. Remove from git history: `.\scripts\security\remove-config-from-history.ps1`
 3. Force push: `git push --force` (coordinate with team first!)
 
 **Or on Linux/Mac:**
@@ -191,8 +194,8 @@ git commit -m "Remove config.json from tracking - security fix"
 ./scripts/verify-secrets-safe.sh
 
 # If config.json is NOT ignored or was committed:
-chmod +x remove-config-from-git.sh
-./remove-config-from-git.sh
+chmod +x scripts/security/remove-config-from-git.sh
+./scripts/security/remove-config-from-git.sh
 git commit -m "Remove config.json from tracking - security fix"
 ```
 
@@ -388,14 +391,50 @@ After verification passes:
 | Script | Purpose | When to Use |
 |--------|---------|-------------|
 | `verify-everything.ps1` / `.sh` | **Master verification** - Checks everything | Before starting app, before committing |
-| `remove-config-from-git.ps1` / `.sh` | **Remove config.json from git** | If config.json was committed or not ignored |
+| `scripts/security/remove-config-from-git.ps1` / `.sh` | **Remove config.json from git** | If config.json was committed or not ignored |
+| `scripts/security/remove-config-from-history.ps1` | Remove config.json from git history | If config.json was already pushed to GitHub |
+| `scripts/utils/SYNC_NOW.ps1` | Sync all changes to git safely | After making changes, before pushing |
 | `scripts/verify-secrets-safe.ps1` / `.sh` | Quick security check only | Before git commit |
 | `scripts/check-requirements.js` | Requirements checklist | Initial setup |
-| `scripts/remove-secret-from-history.ps1` / `.sh` | Remove secrets from git history | If secrets were accidentally committed |
+| `scripts/security/remove-secret-from-history.ps1` / `.sh` | Remove secrets from git history | If secrets were accidentally committed |
 
 **Always run `verify-everything.ps1` before starting the app!**
 
 ---
 
 **That's it!** Fill out `config.json`, run `verify-everything.ps1`, then start the app. 🚀
+
+**For explanations and commentary, see `NOTES.md`**
+
+---
+
+## 📁 Repository Structure
+
+```
+QuizTheBest/
+├── README.md                    # Project overview
+├── SETUP.md                     # ⭐ Complete setup guide (read this!)
+├── config.json                  # ⭐ Your API keys (gitignored)
+├── config.json.template         # Template (safe to commit)
+├── verify-everything.ps1        # ⭐ Master verification script
+├── docker-compose.yml           # Docker configuration
+├── backend/                     # Node.js backend
+│   ├── src/                     # Source code
+│   ├── firestore.*              # Firestore config
+│   └── aws-secrets.env          # Bearer token (gitignored)
+├── frontend/                    # React frontend
+│   └── src/                     # Source code
+├── mobile/                      # React Native mobile app
+│   └── src/                     # Source code
+├── scripts/                     # Utility scripts
+│   ├── security/                # Security scripts
+│   ├── utils/                   # Utility scripts (SYNC_NOW, etc.)
+│   ├── generate_env_files.py    # Generate .env from config.json
+│   └── check_config.py          # Validate config.json
+├── docs/                        # Documentation
+│   ├── mobile/                  # Mobile-specific docs
+│   └── security/                # Security guides
+├── shared/                       # Shared types/services
+└── temp/                        # Temporary files (gitignored)
+```
 

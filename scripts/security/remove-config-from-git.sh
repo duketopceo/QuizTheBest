@@ -75,7 +75,7 @@ echo ""
 echo "Next steps:"
 echo "  1. Commit the removal: git commit -m 'Remove config.json from tracking'"
 echo "  2. If already pushed to GitHub, you need to remove from history:"
-echo "     See: docs/security/URGENT_AWS_KEY_REMEDIATION.md"
+echo "     Run: ./scripts/security/remove-config-from-history.ps1"
 echo "  3. Verify: ./verify-everything.sh"
 echo ""
 
