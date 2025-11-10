@@ -296,9 +296,37 @@ def generate_config_template():
         required = section_config.get("required", {})
         optional = section_config.get("optional", {})
         
+        # Add required values with placeholder indicating user input needed
         for key, spec in required.items():
-            template[section_name][key] = spec.get("example", "")
+            example = spec.get("example", "")
+            # Use clear placeholders for sensitive/unique values that need user input
+            if key == "AWS_ACCESS_KEY_ID":
+                template[section_name][key] = "YOUR_AWS_ACCESS_KEY_ID_HERE"
+            elif key == "AWS_SECRET_ACCESS_KEY":
+                template[section_name][key] = "YOUR_AWS_SECRET_ACCESS_KEY_HERE"
+            elif key == "COGNITO_USER_POOL_ID":
+                template[section_name][key] = "us-east-1_YOUR_POOL_ID_HERE"
+            elif key == "COGNITO_CLIENT_ID":
+                template[section_name][key] = "YOUR_COGNITO_CLIENT_ID_HERE"
+            elif key == "FIREBASE_PROJECT_ID":
+                template[section_name][key] = "YOUR_FIREBASE_PROJECT_ID_HERE"
+            elif key == "FIREBASE_PRIVATE_KEY":
+                template[section_name][key] = "-----BEGIN PRIVATE KEY-----\\nYOUR_PRIVATE_KEY_HERE\\n-----END PRIVATE KEY-----"
+            elif key == "FIREBASE_CLIENT_EMAIL":
+                template[section_name][key] = "firebase-adminsdk-xxxxx@YOUR_PROJECT.iam.gserviceaccount.com"
+            elif key == "BEDROCK_AGENT_ID":
+                template[section_name][key] = "YOUR_BEDROCK_AGENT_ID_HERE"
+            elif key == "BEDROCK_AGENT_ALIAS_ID":
+                template[section_name][key] = "YOUR_BEDROCK_AGENT_ALIAS_ID_HERE"
+            elif key == "VITE_COGNITO_USER_POOL_ID":
+                template[section_name][key] = "us-east-1_YOUR_POOL_ID_HERE"
+            elif key == "VITE_COGNITO_CLIENT_ID":
+                template[section_name][key] = "YOUR_COGNITO_CLIENT_ID_HERE"
+            else:
+                # Keep example values for things like regions and URLs (can be customized)
+                template[section_name][key] = example
         
+        # Add optional values with defaults
         for key, spec in optional.items():
             if "default" in spec:
                 template[section_name][key] = spec["default"]

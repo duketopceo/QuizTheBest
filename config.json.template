@@ -1,0 +1,158 @@
+{
+  "_comment": "This is a template file. Copy to config.json and fill in your values.",
+  "_instructions": "Values marked with 'REQUIRED - YOUR INPUT' must be filled in. Values with defaults can be left as-is or customized.",
+  
+  "backend": {
+    "_section_comment": "Backend configuration - All values in this section are REQUIRED",
+    
+    "AWS_REGION": {
+      "_comment": "REQUIRED - YOUR INPUT: AWS region (e.g., us-east-1, us-west-2)",
+      "_where_to_find": "AWS Console → Region selector (top right)",
+      "value": "us-east-1"
+    },
+    
+    "AWS_ACCESS_KEY_ID": {
+      "_comment": "REQUIRED - YOUR INPUT: AWS Access Key ID (20 characters, uppercase)",
+      "_where_to_find": "AWS Console → IAM → Users → Your User → Security credentials → Access keys",
+      "value": "YOUR_AWS_ACCESS_KEY_ID_HERE"
+    },
+    
+    "AWS_SECRET_ACCESS_KEY": {
+      "_comment": "REQUIRED - YOUR INPUT: AWS Secret Access Key (40+ characters)",
+      "_where_to_find": "Same location as Access Key ID (only shown once when created)",
+      "value": "YOUR_AWS_SECRET_ACCESS_KEY_HERE"
+    },
+    
+    "COGNITO_USER_POOL_ID": {
+      "_comment": "REQUIRED - YOUR INPUT: Cognito User Pool ID (format: us-east-1_XXXXXXXXX)",
+      "_where_to_find": "AWS Console → Cognito → User Pools → Your Pool → General settings",
+      "value": "us-east-1_YOUR_POOL_ID_HERE"
+    },
+    
+    "COGNITO_CLIENT_ID": {
+      "_comment": "REQUIRED - YOUR INPUT: Cognito App Client ID",
+      "_where_to_find": "AWS Console → Cognito → User Pools → Your Pool → App integration → App clients",
+      "value": "YOUR_COGNITO_CLIENT_ID_HERE"
+    },
+    
+    "FIREBASE_PROJECT_ID": {
+      "_comment": "REQUIRED - YOUR INPUT: Firebase Project ID",
+      "_where_to_find": "Firebase Console → Project Settings → General",
+      "value": "YOUR_FIREBASE_PROJECT_ID_HERE"
+    },
+    
+    "FIREBASE_PRIVATE_KEY": {
+      "_comment": "REQUIRED - YOUR INPUT: Firebase Service Account Private Key (full key with BEGIN/END markers)",
+      "_where_to_find": "Firebase Console → Project Settings → Service Accounts → Generate new private key",
+      "_note": "In JSON, use \\n for newlines. Keep the full key including -----BEGIN PRIVATE KEY----- and -----END PRIVATE KEY-----",
+      "value": "-----BEGIN PRIVATE KEY-----\\nYOUR_PRIVATE_KEY_HERE\\n-----END PRIVATE KEY-----"
+    },
+    
+    "FIREBASE_CLIENT_EMAIL": {
+      "_comment": "REQUIRED - YOUR INPUT: Firebase Service Account Email",
+      "_where_to_find": "Firebase Console → Project Settings → Service Accounts",
+      "value": "firebase-adminsdk-xxxxx@YOUR_PROJECT.iam.gserviceaccount.com"
+    },
+    
+    "BEDROCK_AGENT_ID": {
+      "_comment": "REQUIRED - YOUR INPUT: AWS Bedrock Agent ID",
+      "_where_to_find": "AWS Console → Bedrock → Agents → Your Agent → Agent ID",
+      "value": "YOUR_BEDROCK_AGENT_ID_HERE"
+    },
+    
+    "BEDROCK_AGENT_ALIAS_ID": {
+      "_comment": "REQUIRED - YOUR INPUT: AWS Bedrock Agent Alias ID",
+      "_where_to_find": "AWS Console → Bedrock → Agents → Your Agent → Aliases → Alias ID",
+      "value": "YOUR_BEDROCK_AGENT_ALIAS_ID_HERE"
+    },
+    
+    "BEDROCK_MODEL_ID": {
+      "_comment": "OPTIONAL - Default provided, can customize",
+      "_default": "amazon.nova-micro-v1:0",
+      "value": "amazon.nova-micro-v1:0"
+    },
+    
+    "BEDROCK_MAX_TOKENS": {
+      "_comment": "OPTIONAL - Default provided, can customize",
+      "_default": "2000",
+      "value": "2000"
+    },
+    
+    "SERPAPI_KEY": {
+      "_comment": "OPTIONAL - YOUR INPUT: SerpAPI key for enhanced search (app works without it)",
+      "_where_to_find": "https://serpapi.com/dashboard",
+      "value": "YOUR_SERPAPI_KEY_HERE_OR_LEAVE_EMPTY"
+    },
+    
+    "PORT": {
+      "_comment": "OPTIONAL - Default provided, can customize",
+      "_default": "3000",
+      "value": "3000"
+    },
+    
+    "NODE_ENV": {
+      "_comment": "OPTIONAL - Default provided, can customize",
+      "_default": "development",
+      "value": "development"
+    },
+    
+    "ALLOWED_ORIGINS": {
+      "_comment": "OPTIONAL - Default provided, customize for your frontend URLs",
+      "_default": "http://localhost:5173,http://localhost:3000",
+      "value": "http://localhost:5173,http://localhost:3000"
+    }
+  },
+  
+  "frontend": {
+    "_section_comment": "Frontend configuration - All values in this section are REQUIRED",
+    
+    "VITE_API_URL": {
+      "_comment": "REQUIRED - YOUR INPUT: Backend API URL",
+      "_development": "http://localhost:3000/api",
+      "_production": "https://your-api-domain.com/api",
+      "value": "http://localhost:3000/api"
+    },
+    
+    "VITE_AWS_REGION": {
+      "_comment": "REQUIRED - YOUR INPUT: Should match backend AWS_REGION",
+      "value": "us-east-1"
+    },
+    
+    "VITE_COGNITO_USER_POOL_ID": {
+      "_comment": "REQUIRED - YOUR INPUT: Should match backend COGNITO_USER_POOL_ID",
+      "value": "us-east-1_YOUR_POOL_ID_HERE"
+    },
+    
+    "VITE_COGNITO_CLIENT_ID": {
+      "_comment": "REQUIRED - YOUR INPUT: Should match backend COGNITO_CLIENT_ID",
+      "value": "YOUR_COGNITO_CLIENT_ID_HERE"
+    }
+  },
+  
+  "mobile": {
+    "_section_comment": "Mobile app configuration - All values in this section are REQUIRED",
+    
+    "API_URL": {
+      "_comment": "REQUIRED - YOUR INPUT: Should match frontend VITE_API_URL",
+      "_development": "http://localhost:3000/api",
+      "_production": "https://your-api-domain.com/api",
+      "_note": "For Android emulator, use 10.0.2.2 instead of localhost",
+      "value": "http://localhost:3000/api"
+    },
+    
+    "AWS_REGION": {
+      "_comment": "REQUIRED - YOUR INPUT: Should match backend AWS_REGION",
+      "value": "us-east-1"
+    },
+    
+    "COGNITO_USER_POOL_ID": {
+      "_comment": "REQUIRED - YOUR INPUT: Should match backend COGNITO_USER_POOL_ID",
+      "value": "us-east-1_YOUR_POOL_ID_HERE"
+    },
+    
+    "COGNITO_CLIENT_ID": {
+      "_comment": "REQUIRED - YOUR INPUT: Should match backend COGNITO_CLIENT_ID",
+      "value": "YOUR_COGNITO_CLIENT_ID_HERE"
+    }
+  }
+}
