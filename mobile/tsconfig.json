@@ -22,7 +22,8 @@
   },
   "include": [
     "src/**/*",
-    "shared/**/*"
+    "shared/**/*",
+    "src/config/env.d.ts"
   ],
   "exclude": [
     "node_modules",

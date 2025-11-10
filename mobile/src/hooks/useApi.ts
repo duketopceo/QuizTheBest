@@ -1,8 +1,9 @@
 import {useAuth} from '../context/AuthContext';
 import {fetchAuthSession} from 'aws-amplify/auth';
 import {ApiClient} from '@shared/services/api';
+import {API_URL} from '@env';
 
-const apiClient = new ApiClient(process.env.API_URL || 'http://localhost:3000/api');
+const apiClient = new ApiClient(API_URL || 'http://localhost:3000/api');
 
 export function useApi() {
   const {refreshSession} = useAuth();
