@@ -1,0 +1,21 @@
+# Configuration files that may contain secrets
+config.json
+!config.json.template
+
+# Environment files with secrets
+.env
+.env.local
+.env.*.local
+*.env
+!*.env.example
+backend/.env
+backend/aws-secrets.env
+frontend/.env
+mobile/.env
+
+# Secret files
+*.secrets
+.env.secrets
+aws-secrets.env
+**/aws-secrets.env
+

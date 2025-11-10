@@ -97,7 +97,7 @@ function checkRequirement(category, item) {
   if (item.includes('.env')) {
     const envPath = item.match(/backend|frontend|mobile/)?.[0];
     if (envPath) {
-      const envFile = path.join(__dirname, envPath, '.env');
+      const envFile = path.join(__dirname, '..', envPath, '.env');
       return fs.existsSync(envFile);
     }
   }
@@ -105,7 +105,7 @@ function checkRequirement(category, item) {
   if (item.includes('npm install')) {
     const dir = item.match(/backend|frontend|mobile/)?.[0];
     if (dir) {
-      const nodeModules = path.join(__dirname, dir, 'node_modules');
+      const nodeModules = path.join(__dirname, '..', dir, 'node_modules');
       return fs.existsSync(nodeModules);
     }
   }
@@ -113,6 +113,7 @@ function checkRequirement(category, item) {
   return false;
 }
 
-console.log('💡 TIP: Read ANDROID_SETUP_CHECKLIST.md for detailed mobile setup instructions');
-console.log('💡 TIP: Read MANUAL_EDIT_REQUIRED.md for detailed configuration guide');
-console.log('💡 TIP: Read aws-setup.md for AWS service configuration\n');
+console.log('💡 TIP: Read docs/ANDROID_SETUP_CHECKLIST.md for detailed mobile setup instructions');
+console.log('💡 TIP: Read docs/MANUAL_EDIT_REQUIRED.md for detailed configuration guide');
+console.log('💡 TIP: Read docs/aws-setup.md for AWS service configuration\n');
+

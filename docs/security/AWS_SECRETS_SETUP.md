@@ -17,19 +17,19 @@ The bearer token is already configured in `backend/aws-secrets.env`. To use it:
 **Option A: Load via environment variable**
 ```bash
 # Windows (PowerShell)
-$env:AWS_BEARER_TOKEN_BEDROCK="ABSKQmVkcm9ja0FQSUtleS0yOW8xLWF0LTg5MjQ4NTEyMDE4Mjo3WTlFcEhrMzlaSnAwdTdOclBLb2lPbGFRekFjSWdPR0RBKytBazFsVitGNWdnM05CWlpzVXJFamdLMD0="
+$env:AWS_BEARER_TOKEN_BEDROCK="YOUR_BEARER_TOKEN_HERE"
 
 # Windows (CMD)
-set AWS_BEARER_TOKEN_BEDROCK=ABSKQmVkcm9ja0FQSUtleS0yOW8xLWF0LTg5MjQ4NTEyMDE4Mjo3WTlFcEhrMzlaSnAwdTdOclBLb2lPbGFRekFjSWdPR0RBKytBazFsVitGNWdnM05CWlpzVXJFamdLMD0=
+set AWS_BEARER_TOKEN_BEDROCK=YOUR_BEARER_TOKEN_HERE
 
 # Linux/macOS
-export AWS_BEARER_TOKEN_BEDROCK="ABSKQmVkcm9ja0FQSUtleS0yOW8xLWF0LTg5MjQ4NTEyMDE4Mjo3WTlFcEhrMzlaSnAwdTdOclBLb2lPbGFRekFjSWdPR0RBKytBazFsVitGNWdnM05CWlpzVXJFamdLMD0="
+export AWS_BEARER_TOKEN_BEDROCK="YOUR_BEARER_TOKEN_HERE"
 ```
 
 **Option B: Add to your .env file**
 ```bash
 # Copy the value from aws-secrets.env to your .env file
-AWS_BEARER_TOKEN_BEDROCK=ABSKQmVkcm9ja0FQSUtleS0yOW8xLWF0LTg5MjQ4NTEyMDE4Mjo3WTlFcEhrMzlaSnAwdTdOclBLb2lPbGFRekFjSWdPR0RBKytBazFsVitGNWdnM05CWlpzVXJFamdLMD0=
+AWS_BEARER_TOKEN_BEDROCK=YOUR_BEARER_TOKEN_HERE
 ```
 
 **Option C: Use dotenv to load aws-secrets.env**

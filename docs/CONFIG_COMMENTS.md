@@ -66,5 +66,6 @@ Before running the app, make sure you've replaced:
 
 ## See Also
 
-- [Complete Configuration Setup Guide](docs/CONFIG_SETUP.md)
-- [Quick Reference Guide](docs/CONFIG_GUIDE.md)
+- [Complete Configuration Setup Guide](CONFIG_SETUP.md)
+- [Quick Reference Guide](CONFIG_GUIDE.md)
+
