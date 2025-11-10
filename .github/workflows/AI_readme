@@ -73,3 +73,32 @@ Every user request triggers stepwise AI calls:
 - AI tutor mode using chat interface for interactive Q&A
 
 Goal: Produce full scaffolding code with modular design – frontend UI, API routes, LLM prompt templates, and database models for users, topics, and flashcards. Ensure the result compiles successfully and is deployable across Android and web as one codebase.
+
+
+Three-Tier App
+Stack Template
+A comprehensive template for three-tier web applications with FastAPI backend, React frontend, and PostgreSQL data layer
+
+Technology Stack
+FastAPI
+React
+PostgreSQL
+3 technologies
+FastAPI
+FastAPI
+React
+React
+PostgreSQL
+PostgreSQL
+General Sections
+3
+These sections will be created once for your entire project blueprint.
+
+Backend
+FastAPI-based backend with the following components: - **Authentication**: AWS Cognito integration for user management and JWT token validation - **Database**: SQLModel ORM with Alembic migrations for schema management - **API Structure**: RESTful endpoints organized by domain modules (common, graph, validator, etc.) - **Dependencies**: Dependency injection pattern for services and database sessions - **Error Handling**: Standardized error responses and logging - **Security**: CORS configuration, API key management, and route protection
+
+Frontend
+React-based frontend with modern tooling: - **Build Tool**: Vite for fast development and optimized builds - **UI Framework**: shadcn/ui components with Tailwind CSS for styling - **State Management**: React hooks and context for application state - **Authentication**: AWS Amplify integration with Cognito for auth flows - **Routing**: React Router for single-page application navigation - **API Integration**: Custom useApi hook for backend communication with cognito amplify auth - **TypeScript**: Full type safety across components and API interfaces
+
+Data Layer
+Robust data architecture with cloud-native services: - **Primary Database**: Aurora PostgreSQL for relational data with automatic scaling - **Object Storage**: S3 for file storage (artifacts, documents, images) - **ORM**: SQLModel for Python object-relational mapping with
