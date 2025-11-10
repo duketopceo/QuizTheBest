@@ -22,6 +22,16 @@
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
+        <!-- Deep link intent filter for OAuth redirects (if using OAuth) -->
+        <!-- Uncomment if you need OAuth redirect handling -->
+        <!--
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="https" android:host="d84l1y8p4kdic.cloudfront.net" />
+        </intent-filter>
+        -->
       </activity>
     </application>
 </manifest>

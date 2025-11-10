@@ -29,13 +29,17 @@ Create an IAM policy for Bedrock access:
     {
       "Effect": "Allow",
       "Action": [
-        "bedrock:InvokeModel",
+        "bedrock:InvokeAgent",
         "bedrock:ListFoundationModels"
       ],
-      "Resource": "arn:aws:bedrock:*::foundation-model/amazon.nova-micro-v1:0"
+      "Resource": [
+        "arn:aws:bedrock:us-east-1:892485120182:agent/2DNZCRAKF9",
+        "arn:aws:bedrock:us-east-1:892485120182:agent-alias/2DNZCRAKF9/OQNLDGNQDS"
+      ]
     }
   ]
 }
+ 
 ```
 
 Attach this policy to your backend execution role (Lambda/EC2 instance role).

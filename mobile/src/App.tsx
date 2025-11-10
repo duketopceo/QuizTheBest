@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {PaperProvider} from 'react-native-paper';
 import {AuthProvider} from './context/AuthContext';
 import {ThemeProvider} from './context/ThemeContext';
+import {configureAmplify} from './config/amplify';
 import LoginScreen from './screens/LoginScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import TopicSearchScreen from './screens/TopicSearchScreen';
@@ -14,6 +15,11 @@ import QuizScreen from './screens/QuizScreen';
 const Stack = createNativeStackNavigator();
 
 function App(): React.JSX.Element {
+  // Configure Amplify on app startup (before AuthProvider)
+  useEffect(() => {
+    configureAmplify();
+  }, []);
+
   return (
     <PaperProvider>
       <ThemeProvider>

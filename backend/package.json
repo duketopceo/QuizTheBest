@@ -8,7 +8,8 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "lint": "eslint . --ext .ts",
-    "test": "jest"
+    "test": "jest",
+    "test:jwks": "tsx src/utils/testJWKS.ts"
   },
   "dependencies": {
     "express": "^4.18.2",

@@ -7,6 +7,7 @@ declare module '@env' {
   export const AWS_REGION: string;
   export const COGNITO_USER_POOL_ID: string;
   export const COGNITO_CLIENT_ID: string;
+  export const COGNITO_REDIRECT_URI?: string; // Optional: for OAuth flows
   export const DEBUG: string;
 }
 
