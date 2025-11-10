@@ -2,7 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
 import { errorHandler } from './middleware/errorHandler'
-import { securityMiddleware } from './middleware/security'
+import { securityMiddleware, agentSecurityMiddleware } from './middleware/security'
 import { rateLimiter } from './middleware/rateLimiter'
 import { corsConfig } from './middleware/cors'
 
@@ -14,12 +14,14 @@ import quizRoutes from './routes/quiz'
 import userRoutes from './routes/user'
 import exportRoutes from './routes/export'
 import studySetRoutes from './routes/studySets'
+import aiRoutes from './routes/ai'
 
 const app = express()
 
 // Security middleware
 app.use(helmet())
 app.use(securityMiddleware)
+app.use(agentSecurityMiddleware)
 app.use(cors(corsConfig))
 
 // Body parsing
@@ -42,6 +44,7 @@ app.use('/api/quiz', quizRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/export', exportRoutes)
 app.use('/api/study-sets', studySetRoutes)
+app.use('/api/ai', aiRoutes)
 
 // Error handling (must be last)
 app.use(errorHandler)
