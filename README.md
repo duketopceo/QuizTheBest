@@ -15,10 +15,54 @@ A Progressive Web App (PWA) that allows users to request learning topics and rec
 
 ```
 QuizTheBest/
+├── backend/          # Node.js backend API
+│   ├── src/          # Source code
+│   ├── firestore.rules    # Firestore security rules
+│   └── firestore.indexes.json  # Firestore indexes
 ├── frontend/          # React frontend application
-├── backend/           # Node.js backend API
-├── firestore.rules    # Firestore security rules
-└── firestore.indexes.json  # Firestore indexes
+├── mobile/            # React Native mobile app
+├── shared/            # Shared types and services
+├── docs/              # Documentation files
+├── scripts/           # Utility scripts
+│   ├── check_config.py      # Configuration validator
+│   └── generate_env_files.py # Generate .env files from config.json
+└── config.json        # Centralized configuration (gitignored)
+```
+
+## Quick Start
+
+### 1. Configuration Setup
+
+The project uses a centralized `config.json` file for all configuration values.
+
+**First time setup:**
+```bash
+# Create and validate config.json template
+python3 scripts/check_config.py
+
+# Edit config.json with your actual values
+# See docs/CONFIG_SETUP.md for detailed instructions
+
+# Validate your configuration
+python3 scripts/check_config.py
+
+# Generate .env files for each service
+python3 scripts/generate_env_files.py
+```
+
+**See [docs/CONFIG_SETUP.md](docs/CONFIG_SETUP.md) for complete configuration guide.**
+
+### 2. Install Dependencies
+
+```bash
+# Backend
+cd backend && npm install
+
+# Frontend
+cd frontend && npm install
+
+# Mobile
+cd mobile && npm install
 ```
 
 ## Setup Instructions
@@ -26,35 +70,24 @@ QuizTheBest/
 ### Prerequisites
 
 - Node.js 20+
+- Python 3.7+ (for configuration scripts)
 - AWS Account with Bedrock and Cognito configured
 - Firebase Project with Firestore enabled
 - SerpAPI account (optional, app will work without it)
 
 ### Backend Setup
 
-1. Navigate to backend directory:
+1. Install dependencies:
 ```bash
-cd backend
+cd backend && npm install
 ```
 
-2. Install dependencies:
+2. The `.env` file should already be generated from `config.json`. If not:
 ```bash
-npm install
+python3 scripts/generate_env_files.py
 ```
 
-3. Copy `.env.example` to `.env` and configure:
-```bash
-cp .env.example .env
-```
-
-4. Configure environment variables:
-- AWS credentials and region
-- Cognito User Pool ID and Client ID
-- Firebase Admin SDK credentials
-- SerpAPI key (optional)
-- Bedrock model configuration
-
-5. Build and run:
+3. Build and run:
 ```bash
 npm run build
 npm start
@@ -67,40 +100,45 @@ npm run dev
 
 ### Frontend Setup
 
-1. Navigate to frontend directory:
+1. Install dependencies:
 ```bash
-cd frontend
+cd frontend && npm install
 ```
 
-2. Install dependencies:
+2. The `.env` file should already be generated from `config.json`. If not:
 ```bash
-npm install
+python3 scripts/generate_env_files.py
 ```
 
-3. Copy `.env.example` to `.env` and configure:
-```bash
-cp .env.example .env
-```
-
-4. Configure environment variables:
-- API URL
-- AWS Region
-- Cognito User Pool ID and Client ID
-
-5. Run development server:
+3. Run development server:
 ```bash
 npm run dev
 ```
 
-6. Build for production:
+4. Build for production:
 ```bash
 npm run build
 ```
+
+### Mobile Setup
+
+1. Install dependencies:
+```bash
+cd mobile && npm install
+```
+
+2. The `.env` file should already be generated from `config.json`. If not:
+```bash
+python3 scripts/generate_env_files.py
+```
+
+3. See [docs/ANDROID_STUDIO_SETUP.md](docs/ANDROID_STUDIO_SETUP.md) for Android setup
 
 ### Firebase Setup
 
 1. Deploy Firestore security rules:
 ```bash
+cd backend
 firebase deploy --only firestore:rules
 ```
 
@@ -109,20 +147,27 @@ firebase deploy --only firestore:rules
 firebase deploy --only firestore:indexes
 ```
 
+## Configuration
+
+All configuration is managed through `config.json` in the project root. This file is gitignored for security.
+
+**Configuration includes:**
+- AWS credentials (Access Key, Secret Key, Region)
+- AWS Cognito (User Pool ID, Client ID)
+- AWS Bedrock (Agent ID, Alias ID, Model ID)
+- Firebase (Project ID, Private Key, Client Email)
+- SerpAPI (optional API key)
+- API URLs and CORS settings
+
+**See [docs/CONFIG_SETUP.md](docs/CONFIG_SETUP.md) for complete setup instructions.**
+
 ## AWS Configuration
 
-### Bedrock Setup
+Detailed AWS setup guides are available in the `docs/` directory:
 
-1. Verify AWS Nova Micro 1 model availability in your chosen AWS region (us-east-1 recommended)
-2. Enable the model in Bedrock console
-3. Configure IAM permissions for Bedrock access
-
-### Cognito Setup
-
-1. Create a Cognito User Pool
-2. Create a User Pool Client with refresh tokens enabled
-3. Configure authentication flows (email/password)
-4. Update environment variables with Pool ID and Client ID
+- [AWS Setup Guide](docs/aws-setup.md) - General AWS configuration
+- [Bedrock Agent Setup](docs/BEDROCK_AGENT_SETUP.md) - Bedrock Agent configuration
+- [Cognito Setup](docs/COGNITO_SETUP.md) - Cognito authentication setup
 
 ## Security Considerations
 
@@ -163,13 +208,24 @@ cd frontend
 npm run lint
 ```
 
+## Documentation
+
+All documentation is organized in the `docs/` directory:
+
+- **[Configuration Setup](docs/CONFIG_SETUP.md)** - Complete configuration guide
+- **[AWS Setup](docs/aws-setup.md)** - AWS services configuration
+- **[Bedrock Agent Setup](docs/BEDROCK_AGENT_SETUP.md)** - Bedrock Agent configuration
+- **[Cognito Setup](docs/COGNITO_SETUP.md)** - Authentication setup
+- **[Android Studio Setup](docs/ANDROID_STUDIO_SETUP.md)** - Mobile app setup
+- **[Implementation Summary](docs/IMPLEMENTATION_SUMMARY.md)** - Technical overview
+
 ## Deployment
 
 ### Frontend (AWS Amplify)
 
 1. Connect repository to AWS Amplify
 2. Configure build settings
-3. Set environment variables
+3. Set environment variables (or use config.json)
 4. Deploy
 
 ### Backend (AWS Lambda/EC2)

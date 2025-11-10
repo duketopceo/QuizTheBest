@@ -9,6 +9,7 @@ export const BEDROCK_CONFIG = {
   maxTokens: parseInt(process.env.BEDROCK_MAX_TOKENS || '2000', 10),
   temperature: 0.7,
   topP: 0.9,
+  bearerToken: process.env.AWS_BEARER_TOKEN_BEDROCK, // Optional: Bearer token for API key authentication
 }
 
 /**

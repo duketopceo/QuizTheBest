@@ -1,4 +1,3 @@
-import { getJson } from 'serpapi'
 import { logger } from '../../utils/logger'
 
 export interface SearchResult {
@@ -8,10 +7,25 @@ export interface SearchResult {
   source: string
 }
 
+// Try to import serpapi, but make it optional
+let getJson: any = null
+try {
+  const serpapi = require('serpapi')
+  getJson = serpapi.getJson
+} catch (e) {
+  logger.debug('SerpAPI package not installed (optional dependency)')
+}
+
 /**
  * SerpAPI search with error handling and fallback
  */
 export async function searchSerpAPI(query: string): Promise<SearchResult[]> {
+  // Check if serpapi is available
+  if (!getJson) {
+    logger.debug('SerpAPI package not available, skipping SerpAPI search')
+    return []
+  }
+
   const apiKey = process.env.SERPAPI_KEY
 
   if (!apiKey) {

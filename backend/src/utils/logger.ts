@@ -25,7 +25,8 @@ class Logger {
   }
 
   debug(message: string, meta?: any) {
-    if (process.env.NODE_ENV !== 'production') {
+    // Always show debug in development or if DEBUG env var is set
+    if (process.env.NODE_ENV !== 'production' || process.env.DEBUG === 'true') {
       console.debug(this.formatMessage('debug', message, meta))
     }
   }

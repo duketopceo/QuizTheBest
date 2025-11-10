@@ -1,0 +1,32 @@
+{
+  "backend": {
+    "AWS_REGION": "us-east-1",
+    "AWS_ACCESS_KEY_ID": "AKIAIOSFODNN7EXAMPLE",
+    "AWS_SECRET_ACCESS_KEY": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+    "COGNITO_USER_POOL_ID": "us-east-1_XXXXXXXXX",
+    "COGNITO_CLIENT_ID": "1234567890abcdefghijklmn",
+    "FIREBASE_PROJECT_ID": "quiz-the-best-12345",
+    "FIREBASE_PRIVATE_KEY": "-----BEGIN PRIVATE KEY-----\\n...\\n-----END PRIVATE KEY-----",
+    "FIREBASE_CLIENT_EMAIL": "firebase-adminsdk-xxxxx@project.iam.gserviceaccount.com",
+    "BEDROCK_AGENT_ID": "2DNZCRAKF9",
+    "BEDROCK_AGENT_ALIAS_ID": "OQNLDGNQDS",
+    "BEDROCK_MODEL_ID": "amazon.nova-micro-v1:0",
+    "BEDROCK_MAX_TOKENS": "2000",
+    "SERPAPI_KEY": "your-serpapi-key",
+    "PORT": "3000",
+    "NODE_ENV": "development",
+    "ALLOWED_ORIGINS": "http://localhost:5173,http://localhost:3000"
+  },
+  "frontend": {
+    "VITE_API_URL": "http://localhost:3000/api",
+    "VITE_AWS_REGION": "us-east-1",
+    "VITE_COGNITO_USER_POOL_ID": "us-east-1_XXXXXXXXX",
+    "VITE_COGNITO_CLIENT_ID": "1234567890abcdefghijklmn"
+  },
+  "mobile": {
+    "API_URL": "http://localhost:3000/api",
+    "AWS_REGION": "us-east-1",
+    "COGNITO_USER_POOL_ID": "us-east-1_XXXXXXXXX",
+    "COGNITO_CLIENT_ID": "1234567890abcdefghijklmn"
+  }
+}
