@@ -28,3 +28,10 @@ __pycache__/
 *.pyc
 *.pyo
 
+
+# IDE files
+.idea/
+.vscode/
+.cursor/
+.cursorrules
+.claude/
