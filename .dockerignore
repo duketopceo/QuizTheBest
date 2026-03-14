@@ -1,0 +1,10 @@
+node_modules
+.git
+.github
+mobile
+docs
+scripts
+tests
+*.md
+.env*
+config.json
